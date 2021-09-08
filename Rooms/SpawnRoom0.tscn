@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Rooms/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Rooms/Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Art/Traps/Spikes.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/GameControls.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 39.906, 29 )
@@ -18,16 +19,13 @@ tile_data = PoolIntArray( 131083, 11, 0, 196612, 5, 0, 196619, 12, 0, 262149, 6,
 [node name="Door" parent="Doors" index="0" instance=ExtResource( 2 )]
 position = Vector2( 136, 40 )
 
-[node name="Spikes" parent="Traps" index="0" instance=ExtResource( 3 )]
-position = Vector2( 72, 152 )
-
-[node name="Spikes2" parent="Traps" index="1" instance=ExtResource( 3 )]
+[node name="Spikes2" parent="Traps" index="0" instance=ExtResource( 3 )]
 position = Vector2( 248, 88 )
 
-[node name="Spikes3" parent="Traps" index="2" instance=ExtResource( 3 )]
+[node name="Spikes3" parent="Traps" index="1" instance=ExtResource( 3 )]
 position = Vector2( 248, 72 )
 
-[node name="Spikes4" parent="Traps" index="3" instance=ExtResource( 3 )]
+[node name="Spikes4" parent="Traps" index="2" instance=ExtResource( 3 )]
 position = Vector2( 248, 56 )
 
 [node name="PlayerSpawnPos" type="Position2D" parent="." index="7"]
@@ -36,3 +34,6 @@ position = Vector2( 136.094, 146 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector" index="0"]
 position = Vector2( 136, 77 )
 shape = SubResource( 1 )
+
+[node name="GameControls" parent="." index="9" instance=ExtResource( 4 )]
+position = Vector2( 84, 151 )

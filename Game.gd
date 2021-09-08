@@ -19,3 +19,7 @@ func _ready() -> void:
 
 func _on_Button_pressed():
 	get_tree().reload_current_scene()
+
+
+func _on_Quit_pressed():
+	get_tree().quit()

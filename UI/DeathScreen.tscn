@@ -39,3 +39,15 @@ text = "NEW DUNGEON"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 119.775
+margin_top = 112.0
+margin_right = 214.775
+margin_bottom = 137.0
+custom_fonts/font = ExtResource( 2 )
+disabled = true
+text = "QUIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}

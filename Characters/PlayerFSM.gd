@@ -50,5 +50,7 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 			DeathScreen.get_node("RichTextLabel").set_visible(true)
 			DeathScreen.get_node("Button").set_visible(true)
 			DeathScreen.get_node("Button").disabled = false
+			DeathScreen.get_node("Quit").set_visible(true)
+			DeathScreen.get_node("Quit").disabled = false
 			BackgroundMusic.stop()
 			DeathMusic.play(1.0)
