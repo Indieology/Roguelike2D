@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player/Player.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Shaders/HitFlashShader.gdshader" type="Shader" id=10]
 [ext_resource path="res://Music/Sounds/melee sounds/sword sound.wav" type="AudioStream" id=11]
 [ext_resource path="res://Music/Sounds/playerhurt.wav" type="AudioStream" id=12]
+[ext_resource path="res://UI/Fonts/PixelFont.tres" type="DynamicFont" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -656,8 +657,6 @@ script = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="1"]
-visible = false
-modulate = Color( 1, 0.447059, 0.447059, 1 )
 frames = SubResource( 13 )
 animation = "idle"
 frame = 3
@@ -719,6 +718,54 @@ offset = Vector2( 0, -200 )
 current = true
 zoom = Vector2( 1.1, 1.1 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" index="0"]
+pause_mode = 2
+
+[node name="PauseMenu" type="Node2D" parent="Camera2D/CanvasLayer" index="0"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Camera2D/CanvasLayer/PauseMenu" index="0"]
+margin_left = 0.347244
+margin_right = 500.347
+margin_bottom = 500.0
+color = Color( 0.643137, 0.490196, 0.447059, 0.333333 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="Camera2D/CanvasLayer/PauseMenu" index="1"]
+margin_left = 100.546
+margin_top = 18.4917
+margin_right = 214.546
+margin_bottom = 43.4917
+custom_fonts/font = ExtResource( 13 )
+text = "RESUME"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewDungeon" type="Button" parent="Camera2D/CanvasLayer/PauseMenu" index="2"]
+margin_left = 100.546
+margin_top = 50.9255
+margin_right = 214.546
+margin_bottom = 75.9255
+custom_fonts/font = ExtResource( 13 )
+text = "NEW DUNGEON"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="Camera2D/CanvasLayer/PauseMenu" index="3"]
+margin_left = 100.546
+margin_top = 84.1193
+margin_right = 214.546
+margin_bottom = 109.119
+custom_fonts/font = ExtResource( 13 )
+text = "QUIT"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SwordSound" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 11 )
 volume_db = -24.0
@@ -732,3 +779,6 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="area_entered" from="Sword/Node2D/Sprite/Hitbox" to="Sword/Node2D/Sprite/Hitbox" method="_on_Hitbox_area_entered"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/NewDungeon" to="." method="_on_NewDungeon_pressed"]
+[connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/Exit" to="." method="_on_Exit_pressed"]

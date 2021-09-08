@@ -7,6 +7,7 @@ onready var charge_particles: Particles2D = get_node("Sword/Node2D/Sprite/Charge
 onready var sword_sound: AudioStreamPlayer = get_node("SwordSound")
 onready var player_hurt_sound: AudioStreamPlayer = get_node("PlayerHurtSound")
 onready var hurtbox_timer: Timer = get_node("HurtboxTimer")
+onready var pause_menu: Node2D = get_node("Camera2D/CanvasLayer/PauseMenu")
 
 
 func _process(_delta: float) -> void:
@@ -46,6 +47,9 @@ func get_input() -> void:
 		elif charge_particles.emitting:
 			sword_animation_player.play("circular_attack")
 		
+	if Input.is_action_pressed("pause_menu"):
+		pause_menu.set_visible(true)
+		get_parent().get_tree().paused = true
 	
 func cancel_attack() -> void:
 	sword_animation_player.play("cancel_attack")
@@ -68,3 +72,15 @@ func disable_player_hurtbox() -> void:
 	yield(hurtbox_timer,"timeout")
 	set_collision_layer_bit(4, true)
 	
+
+func _on_Resume_pressed():
+	pause_menu.set_visible(false)
+	get_parent().get_tree().paused = false
+
+func _on_NewDungeon_pressed():
+	get_parent().get_tree().paused = false
+	get_parent().get_tree().reload_current_scene()
+
+func _on_Exit_pressed():
+	get_parent().get_tree().paused = false
+	get_parent().get_tree().quit()
