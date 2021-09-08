@@ -3,6 +3,7 @@ extends Character
 onready var sword: Node2D = get_node("Sword")
 onready var sword_hitbox: Area2D = get_node("Sword/Node2D/Sprite/Hitbox")
 onready var sword_animation_player: AnimationPlayer = get_node("Sword/SwordAnimationPlayer")
+onready var charge_particles: Particles2D = get_node("Sword/Node2D/Sprite/ChargeParticles")
 
 
 func _process(_delta: float) -> void:
@@ -34,9 +35,17 @@ func get_input() -> void:
 		move_direction += Vector2.UP
 	
 	if Input.is_action_just_pressed("ui_attack") and not sword_animation_player.is_playing():
-		sword_animation_player.play("attack")
+		sword_animation_player.play("charge")
+	elif Input.is_action_just_released("ui_attack"):
+		if sword_animation_player.is_playing() and sword_animation_player.current_animation == "charge":
+			sword_animation_player.play("attack")
+		elif charge_particles.emitting:
+			sword_animation_player.play("circular_attack")
 		
 	
+func cancel_attack() -> void:
+	sword_animation_player.play("cancel_attack")
+
 func switch_camera() -> void:
 	var main_scene_camera: Camera2D = get_parent().get_node("Camera2D") 
 	main_scene_camera.position = position

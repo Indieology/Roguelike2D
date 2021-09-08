@@ -7,36 +7,20 @@
 [ext_resource path="res://Characters/Enemies/Skeleton/Skeleton.gd" type="Script" id=5]
 [ext_resource path="res://Art/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png" type="Texture" id=6]
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=10]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 6 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 6 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 6 )
 region = Rect2( 48, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
@@ -55,30 +39,46 @@ region = Rect2( 32, 0, 16, 16 )
 atlas = ExtResource( 3 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="SpriteFrames" id=17]
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 6 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 6 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "explosion",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "move",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
+"loop": true,
+"name": "explosion",
+"speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=18]
+[sub_resource type="CircleShape2D" id=14]
 radius = 5.0
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=15]
 resource_name = "dead"
-length = 1.15
+length = 0.85
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -87,7 +87,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.65 ),
+"times": PoolRealArray( 0, 0.45 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ "idle", "explosion" ]
@@ -99,7 +99,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.75, 0.9, 1.05 ),
+"times": PoolRealArray( 0, 0.45, 0.6, 0.75 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -123,7 +123,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 1.15 ),
+"times": PoolRealArray( 0.85 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -131,7 +131,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=16]
 resource_name = "hurt"
 length = 0.6
 step = 0.05
@@ -172,7 +172,7 @@ tracks/2/keys = {
 "values": [ false, true, false, true, false, true ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=17]
 resource_name = "idle"
 length = 0.8
 loop = true
@@ -201,8 +201,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=18]
 resource_name = "move"
 length = 0.41
 loop = true
@@ -240,19 +252,19 @@ max_speed = 65
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" parent="." index="1"]
-frames = SubResource( 17 )
+frames = SubResource( 13 )
 animation = "idle"
 
 [node name="CollisionShape2D" parent="." index="2"]
 visible = false
 position = Vector2( 0, 2 )
-shape = SubResource( 18 )
+shape = SubResource( 14 )
 
 [node name="AnimationPlayer" parent="." index="3"]
-anims/dead = SubResource( 19 )
-anims/hurt = SubResource( 20 )
-anims/idle = SubResource( 21 )
-anims/move = SubResource( 22 )
+anims/dead = SubResource( 15 )
+anims/hurt = SubResource( 16 )
+anims/idle = SubResource( 17 )
+anims/move = SubResource( 18 )
 
 [node name="PathTimer" parent="." index="4"]
 wait_time = 0.2
