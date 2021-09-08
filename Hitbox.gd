@@ -16,7 +16,7 @@ func _init() -> void:
 	
 func _ready() -> void:
 	assert(collision_shape != null)
-	timer.wait_time = 1
+	timer.wait_time = 3
 	add_child(timer)
 	
 func _on_body_entered(body: PhysicsBody2D) -> void:

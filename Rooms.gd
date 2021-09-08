@@ -1,8 +1,8 @@
 extends Navigation2D
 
 
-const SPAWN_ROOMS: Array = [preload("res://Rooms/SpawnRoom0.tscn"), preload("res://Rooms/SpawnRoom1.tscn")]
-const INTERMEDIATE_ROOMS: Array = [preload("res://Rooms/Room0.tscn"), preload("res://Rooms/Room1.tscn"), preload("res://Rooms/Room2.tscn")]
+const SPAWN_ROOMS: Array = [preload("res://Rooms/SpawnRoom0.tscn"), preload("res://Rooms/SpawnRoom1.tscn"), preload("res://Rooms/SpawnRoom2.tscn")]
+const INTERMEDIATE_ROOMS: Array = [preload("res://Rooms/Room0.tscn"), preload("res://Rooms/Room1.tscn"), preload("res://Rooms/Room2.tscn"), preload("res://Rooms/Room3.tscn")]
 const END_ROOMS: Array = [preload("res://Rooms/EndRoom0.tscn")]
 
 const TILE_SIZE: int = 16
@@ -10,7 +10,7 @@ const FLOOR_TILE_INDEX: int = 0
 const RIGHT_WALL_TILE_INDEX: int = 4
 const LEFT_WALL_TILE_INDEX: int = 8
 
-export(int) var num_levels: int = 5
+export(int) var num_levels: int = 7
 
 onready var player: KinematicBody2D = get_parent().get_node("Player")
 
@@ -39,7 +39,7 @@ func _spawn_rooms() -> void:
 			var previous_room_door: StaticBody2D = previous_room.get_node("Doors/Door")
 			var exit_tile_pos: Vector2 = previous_room_tilemap.world_to_map(previous_room_door.position) + Vector2.UP 
 
-			var corridor_height: int = randi() % 5 + 2 
+			var corridor_height: int = randi() % 5 + 3 
 			print(corridor_height)
 			for y in corridor_height:
 				previous_room_tilemap.set_cellv(exit_tile_pos + Vector2(-1, -y), LEFT_WALL_TILE_INDEX)
@@ -48,6 +48,6 @@ func _spawn_rooms() -> void:
 				previous_room_tilemap.set_cellv(exit_tile_pos + Vector2(2, -y), RIGHT_WALL_TILE_INDEX)
 
 			var room_tilemap: TileMap = room.get_node("TileMap")
-			room.position =  previous_room_door.global_position + Vector2.UP * room_tilemap.get_used_rect().size.y * TILE_SIZE + Vector2.UP * (1 + corridor_height) * TILE_SIZE + Vector2.LEFT * room_tilemap.world_to_map(room.get_node("Entrance/Position2D2").position).x * TILE_SIZE
+			room.position =  previous_room_door.global_position + Vector2.UP * room_tilemap.get_used_rect().size.y * TILE_SIZE + Vector2.UP * (1 + corridor_height) * TILE_SIZE + Vector2.LEFT * room_tilemap.world_to_map(room.get_node("Entrance/Position2D2").position).x * TILE_SIZE + Vector2(8,8)
 		add_child(room)
 		previous_room = room

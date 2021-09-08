@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/Fonts/munro.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[node name="DeathScreen" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 500.0
+margin_bottom = 500.0
+color = Color( 0.603922, 0, 0, 0.137255 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 101.0
+margin_top = 33.0
+margin_right = 252.0
+margin_bottom = 80.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "The Dungeon has claimed your soul"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 131.275
+margin_top = 80.0
+margin_right = 188.275
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 2 )
+disabled = true
+text = "RESTART"
+__meta__ = {
+"_edit_use_anchors_": false
+}

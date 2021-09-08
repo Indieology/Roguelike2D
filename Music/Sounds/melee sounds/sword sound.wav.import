@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sword sound.wav-b3a6dab4c63f3e4ef67759459ede3f17.sample"
+
+[deps]
+
+source_file="res://Music/Sounds/melee sounds/sword sound.wav"
+dest_files=[ "res://.import/sword sound.wav-b3a6dab4c63f3e4ef67759459ede3f17.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

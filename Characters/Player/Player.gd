@@ -4,6 +4,9 @@ onready var sword: Node2D = get_node("Sword")
 onready var sword_hitbox: Area2D = get_node("Sword/Node2D/Sprite/Hitbox")
 onready var sword_animation_player: AnimationPlayer = get_node("Sword/SwordAnimationPlayer")
 onready var charge_particles: Particles2D = get_node("Sword/Node2D/Sprite/ChargeParticles")
+onready var sword_sound: AudioStreamPlayer = get_node("SwordSound")
+onready var player_hurt_sound: AudioStreamPlayer = get_node("PlayerHurtSound")
+onready var hurtbox_timer: Timer = get_node("HurtboxTimer")
 
 
 func _process(_delta: float) -> void:
@@ -36,6 +39,7 @@ func get_input() -> void:
 	
 	if Input.is_action_just_pressed("ui_attack") and not sword_animation_player.is_playing():
 		sword_animation_player.play("charge")
+		
 	elif Input.is_action_just_released("ui_attack"):
 		if sword_animation_player.is_playing() and sword_animation_player.current_animation == "charge":
 			sword_animation_player.play("attack")
@@ -51,3 +55,16 @@ func switch_camera() -> void:
 	main_scene_camera.position = position
 	main_scene_camera.current = true
 	get_node("Camera2D").current = false
+	
+func play_sword_sound() -> void:
+	sword_sound.play()
+	
+func play_hurt_sound() -> void:
+		player_hurt_sound.play(.13)
+
+func disable_player_hurtbox() -> void:
+	set_collision_layer_bit(4, false)
+	hurtbox_timer.start()
+	yield(hurtbox_timer,"timeout")
+	set_collision_layer_bit(4, true)
+	

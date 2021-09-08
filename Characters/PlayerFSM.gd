@@ -1,5 +1,8 @@
 extends FiniteStateMachine
 
+onready var DeathScreen: CanvasLayer = get_parent().get_parent().get_node("Camera2D/DeathScreen")
+onready var DeathMusic: AudioStreamPlayer = get_parent().get_parent().get_node("DeathMusic")
+onready var BackgroundMusic: AudioStreamPlayer = get_parent().get_parent().get_node("BackgroundMusic")
 
 func _init() -> void:
 	_add_state("idle")
@@ -38,7 +41,14 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 			animation_player.play("move")
 		states.hurt:
 			animation_player.play("hurt")
-			parent.cancel_attack()
+#			parent.cancel_attack()
 		states.dead:
 			animation_player.play("dead")
 			parent.cancel_attack()
+			yield(animation_player,"animation_finished")
+			DeathScreen.get_node("ColorRect").set_visible(true)
+			DeathScreen.get_node("RichTextLabel").set_visible(true)
+			DeathScreen.get_node("Button").set_visible(true)
+			DeathScreen.get_node("Button").disabled = false
+			BackgroundMusic.stop()
+			DeathMusic.play(1.0)
