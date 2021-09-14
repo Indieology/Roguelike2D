@@ -55,7 +55,7 @@ func cancel_attack() -> void:
 	sword_animation_player.play("cancel_attack")
 
 func switch_camera() -> void:
-	var main_scene_camera: Camera2D = get_parent().get_node("Camera2D") 
+	var main_scene_camera: Camera2D = get_parent().get_node("DeathCamera2D")
 	main_scene_camera.position = position
 	main_scene_camera.current = true
 	get_node("Camera2D").current = false
@@ -72,6 +72,13 @@ func disable_player_hurtbox() -> void:
 	yield(hurtbox_timer,"timeout")
 	set_collision_layer_bit(4, true)
 	
+
+func shake():
+	var intensity = 20 / 5.0
+	var duration = 15 / 200.0
+	var type = 1 #  0 for random 1 for sine
+	
+	Shake.shake(intensity, duration, type)
 
 func _on_Resume_pressed():
 	pause_menu.set_visible(false)

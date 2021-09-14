@@ -1,6 +1,6 @@
 extends FiniteStateMachine
 
-onready var DeathScreen: CanvasLayer = get_parent().get_parent().get_node("Camera2D/DeathScreen")
+onready var DeathScreen: CanvasLayer = get_parent().get_parent().get_node("DeathCamera2D/DeathScreen")
 onready var DeathMusic: AudioStreamPlayer = get_parent().get_parent().get_node("DeathMusic")
 onready var BackgroundMusic: AudioStreamPlayer = get_parent().get_parent().get_node("BackgroundMusic")
 

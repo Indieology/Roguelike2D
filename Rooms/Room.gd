@@ -1,6 +1,7 @@
 extends Node2D
 
 
+
 const SPAWN_EXPLOSION_SCENE: PackedScene = preload("res://Characters/Enemies/SpawnExplosion.tscn")
 
 const ENEMY_SCENES: Dictionary = {
@@ -16,6 +17,7 @@ onready var entrance: Node2D = get_node("Entrance")
 onready var door_container: Node2D = get_node("Doors")
 onready var enemy_positions_container: Node2D = get_node("EnemyPositios")
 onready var player_detector: Area2D = get_node("PlayerDetector")
+
 
 func _ready() -> void:
 	num_enemies = enemy_positions_container.get_child_count()
@@ -40,8 +42,11 @@ func _spawn_enemies() -> void:
 		var enemy: KinematicBody2D
 		if randi() % 2 == 0:
 			enemy = ENEMY_SCENES.FLYING_CREATURE.instance()
+
 		else:
 			enemy = ENEMY_SCENES.SKELETON.instance()
+
+			
 		var __ = enemy.connect("tree_exited", self, "_on_enemy_killed")
 		enemy.position = enemy_position.position
 		call_deferred("add_child", enemy)

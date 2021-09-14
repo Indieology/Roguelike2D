@@ -14,6 +14,7 @@ var distance_to_player: float
 onready var attack_timer: Timer = get_node("AttackTimer")
 onready var aim_raycast: RayCast2D = get_node("AimRayCast")
 onready var hurt_sound: AudioStreamPlayer = get_node("HurtSound")
+onready var animation_player: AnimationPlayer = get_node("AnimationPlayer")
 
 func _on_PathTimer_timeout() -> void:
 	if is_instance_valid(player):
@@ -39,6 +40,10 @@ func _get_path_to_move_away_from_player() -> void:
 	path = navigation.get_simple_path(global_position, global_position + dir * 100)
 
 func _throw_knife() -> void:
+	if !player:
+		return
+	animation_player.play("Throw")
+	yield(animation_player, "animation_finished")
 	var projectile: Area2D = THROWABLE_KNIFE_SCENE.instance()
 	projectile.launch(global_position, (player.position - global_position).normalized(), projectile_speed)
 	get_tree().current_scene.add_child(projectile)
