@@ -31,7 +31,9 @@ func _process(delta):
 	var camera = get_tree().current_scene.get_node("DeathCamera2D")
 	var is_player: = is_instance_valid(get_tree().current_scene.get_node("Player"))
 	if is_player:
-		 camera = get_tree().current_scene.get_node("Player").get_node("Camera2D")
+		 camera =  get_tree().current_scene.get_node("Player").get_node("Camera2D")
+	else:
+		return
 	
 	
 	

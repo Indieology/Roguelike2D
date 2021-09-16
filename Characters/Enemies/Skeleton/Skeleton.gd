@@ -40,10 +40,10 @@ func _get_path_to_move_away_from_player() -> void:
 	path = navigation.get_simple_path(global_position, global_position + dir * 100)
 
 func _throw_knife() -> void:
-	if !player:
-		return
 	animation_player.play("Throw")
 	yield(animation_player, "animation_finished")
+	if !player:
+		return
 	var projectile: Area2D = THROWABLE_KNIFE_SCENE.instance()
 	projectile.launch(global_position, (player.position - global_position).normalized(), projectile_speed)
 	get_tree().current_scene.add_child(projectile)

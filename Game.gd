@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var BackgroundMusic: AudioStreamPlayer = get_node("BackgroundMusic")
+onready var BackgroundMusic: AudioStreamPlayer = $BackgroundMusic
 
 
 

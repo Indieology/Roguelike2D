@@ -1,16 +1,12 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Characters/PlayerFSM.gd" type="Script" id=3]
 [ext_resource path="res://Art/DungeonAssetPack/Characters/Knight_idle.png" type="Texture" id=4]
 [ext_resource path="res://Art/DungeonAssetPack/Characters/Knight_walk.png" type="Texture" id=5]
-[ext_resource path="res://Art/DungeonAssetPack/sword.png" type="Texture" id=6]
-[ext_resource path="res://Art/effects (new)/slash_effect_anim_spritesheet.png" type="Texture" id=7]
-[ext_resource path="res://Characters/Player/SwordHitbox.gd" type="Script" id=8]
+[ext_resource path="res://Weapons/Sword.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Art/effects (new)/enemy_afterdead_explosion_anim_spritesheet.png" type="Texture" id=9]
-[ext_resource path="res://Shaders/HitFlashShader.gdshader" type="Shader" id=10]
-[ext_resource path="res://Music/Sounds/melee sounds/sword sound.wav" type="AudioStream" id=11]
 [ext_resource path="res://Music/Sounds/playerhurt.wav" type="AudioStream" id=12]
 [ext_resource path="res://UI/Fonts/PixelFont.tres" type="DynamicFont" id=13]
 
@@ -83,338 +79,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=14]
 radius = 3.66013
 
-[sub_resource type="ShaderMaterial" id=15]
-shader = ExtResource( 10 )
-shader_param/active = false
-
-[sub_resource type="CapsuleShape2D" id=16]
-radius = 4.0
-height = 10.0001
-
-[sub_resource type="ParticlesMaterial" id=17]
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 15.0
-initial_velocity_random = 0.3
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-tangential_accel = 80.0
-tangential_accel_random = 0.2
-
-[sub_resource type="Animation" id=18]
-length = 0.7
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.14, 0.31, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -90.0, 100.0, 100.0, -90.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/Sprite:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.14, 0.36, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 50.0, 60.0, 50.0, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SlashSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.01, 0.18 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ false, true, false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("SlashSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.01, 0.07, 0.14 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/Sprite/Hitbox/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Node2D/Sprite/ChargeParticles:emitting")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Node2D/Sprite:material:shader_param/active")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/7/type = "method"
-tracks/7/path = NodePath("..")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0, 0.06 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "play_sword_sound"
-}, {
-"args": [  ],
-"method": "shake"
-} ]
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "cancel_attack"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/Sprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -90.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D/Sprite/ChargeParticles:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Node2D/Sprite/Hitbox/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/Sprite:material:shader_param/active")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("SlashSprite:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
-[sub_resource type="Animation" id=20]
-resource_name = "charge"
-length = 0.7
-tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/Sprite:material:shader_param/active")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true, false, true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/Sprite/ChargeParticles:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D/Sprite/Hitbox/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="Animation" id=21]
-resource_name = "circular_attack"
-length = 1.6
-tracks/0/type = "value"
-tracks/0/path = NodePath("Node2D/Sprite:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1, 1.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 90.0, 90.0, 165.0, 165.0, 0.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Node2D/Sprite:material:shader_param/active")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Node2D:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1, 1.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -90.0, 270.0, 630.0, 780.0, 780.0, 630.0 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Node2D/Sprite/Hitbox/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 1.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Node2D/Sprite/ChargeParticles:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "method"
-tracks/5/path = NodePath("..")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"values": [ {
-"args": [  ],
-"method": "play_sword_sound"
-}, {
-"args": [  ],
-"method": "shake"
-}, {
-"args": [  ],
-"method": "play_sword_sound"
-}, {
-"args": [  ],
-"method": "shake"
-}, {
-"args": [  ],
-"method": "play_sword_sound"
-} ]
-}
-
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=15]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -473,31 +138,19 @@ tracks/3/keys = {
 } ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sword:visible")
+tracks/4/path = NodePath("AnimatedSprite:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.5 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("AnimatedSprite:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ Color( 1, 0.447059, 0.447059, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=16]
 length = 0.16
 step = 0.01
 tracks/0/type = "value"
@@ -577,7 +230,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=17]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -616,20 +269,8 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("Sword:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=18]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -667,59 +308,22 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" parent="." index="1"]
 frames = SubResource( 13 )
-animation = "idle"
+animation = "dead"
 frame = 3
 
 [node name="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0.347244, 2.23228 )
 shape = SubResource( 14 )
 
-[node name="Sword" type="Node2D" parent="." index="3"]
+[node name="AnimationPlayer" parent="." index="3"]
+anims/dead = SubResource( 15 )
+anims/hurt = SubResource( 16 )
+anims/idle = SubResource( 17 )
+anims/move = SubResource( 18 )
 
-[node name="Node2D" type="Node2D" parent="Sword" index="0"]
-rotation = -1.5708
+[node name="Weapons" type="Node2D" parent="." index="4"]
 
-[node name="Sprite" type="Sprite" parent="Sword/Node2D" index="0"]
-material = SubResource( 15 )
-position = Vector2( 9.5, 5.5 )
-texture = ExtResource( 6 )
-offset = Vector2( 0, -6 )
-
-[node name="Hitbox" type="Area2D" parent="Sword/Node2D/Sprite" index="0"]
-collision_layer = 0
-collision_mask = 12
-script = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Node2D/Sprite/Hitbox" index="0"]
-position = Vector2( -0.499996, -6.49997 )
-shape = SubResource( 16 )
-disabled = true
-
-[node name="ChargeParticles" type="Particles2D" parent="Sword/Node2D/Sprite" index="1"]
-position = Vector2( -0.49999, -8.49997 )
-emitting = false
-amount = 30
-lifetime = 0.3
-process_material = SubResource( 17 )
-
-[node name="SlashSprite" type="Sprite" parent="Sword" index="1"]
-visible = false
-position = Vector2( 18, 0 )
-texture = ExtResource( 7 )
-hframes = 3
-frame = 2
-
-[node name="SwordAnimationPlayer" type="AnimationPlayer" parent="Sword" index="2"]
-anims/attack = SubResource( 18 )
-anims/cancel_attack = SubResource( 19 )
-anims/charge = SubResource( 20 )
-anims/circular_attack = SubResource( 21 )
-
-[node name="AnimationPlayer" parent="." index="4"]
-anims/dead = SubResource( 22 )
-anims/hurt = SubResource( 23 )
-anims/idle = SubResource( 24 )
-anims/move = SubResource( 25 )
+[node name="Sword" parent="Weapons" index="0" instance=ExtResource( 6 )]
 
 [node name="Camera2D" type="Camera2D" parent="." index="5"]
 current = true
@@ -773,19 +377,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SwordSound" type="AudioStreamPlayer" parent="." index="6"]
-stream = ExtResource( 11 )
-volume_db = -24.0
-
-[node name="PlayerHurtSound" type="AudioStreamPlayer" parent="." index="7"]
+[node name="PlayerHurtSound" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 12 )
 volume_db = -20.0
 
-[node name="HurtboxTimer" type="Timer" parent="." index="8"]
+[node name="HurtboxTimer" type="Timer" parent="." index="7"]
 wait_time = 0.5
 one_shot = true
 
-[connection signal="area_entered" from="Sword/Node2D/Sprite/Hitbox" to="Sword/Node2D/Sprite/Hitbox" method="_on_Hitbox_area_entered"]
+[node name="CursorTimer" type="Timer" parent="." index="8"]
+wait_time = 0.02
+one_shot = true
+
 [connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/Resume" to="." method="_on_Resume_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/NewDungeon" to="." method="_on_NewDungeon_pressed"]
 [connection signal="pressed" from="Camera2D/CanvasLayer/PauseMenu/Exit" to="." method="_on_Exit_pressed"]
